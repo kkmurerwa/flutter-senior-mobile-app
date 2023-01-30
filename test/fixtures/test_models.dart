@@ -7,7 +7,7 @@ final tOrderItem = OrderItem(
     dropOffPoint: "dropOffPoint",
     weight: 1.0,
     instructions: "instructions",
-    createdAt: DateTime.now(),
+    createdAt: DateTime(2023,1, 30).microsecondsSinceEpoch,
     createdBy: "createdBy"
 );
 
@@ -17,6 +17,6 @@ final tOrderItemModel = OrderItemModel(
     dropOffPoint: "dropOffPoint",
     weight: 1.0,
     instructions: "instructions",
-    createdAt: DateTime(2023,1, 30),
+    createdAt: DateTime(2023,1, 30).microsecondsSinceEpoch,
     createdBy: "createdBy"
 );

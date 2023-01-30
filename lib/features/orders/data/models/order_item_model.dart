@@ -8,7 +8,7 @@ class OrderItemModel extends OrderItem {
     required String dropOffPoint,
     required double weight,
     required String instructions,
-    required DateTime createdAt,
+    required int createdAt,
     required String createdBy
   }): super(
     id: id,
@@ -27,7 +27,7 @@ class OrderItemModel extends OrderItem {
       dropOffPoint: json['dropOffPoint'],
       weight: (json['weight'] as num).toDouble(),
       instructions: json['instructions'],
-      createdAt: DateTime.parse(json['createdAt']),
+      createdAt: DateTime.parse(json['createdAt']).microsecondsSinceEpoch,
       createdBy: json['createdBy']
     );
   }
@@ -39,7 +39,7 @@ class OrderItemModel extends OrderItem {
       'dropOffPoint': dropOffPoint,
       'weight': weight,
       'instructions': instructions,
-      'createdAt': createdAt.toIso8601String(),
+      'createdAt': DateTime.fromMicrosecondsSinceEpoch(createdAt).toIso8601String(),
       'createdBy': createdBy
     };
   }

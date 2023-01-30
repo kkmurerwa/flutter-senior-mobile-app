@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:floor/floor.dart';
+import 'package:flutter_senior_mobile_app/features/orders/data/daos/orders_dao.dart';
 
-@Entity(tableName: 'orders')
+@Entity(tableName: ORDERS_TABLE)
 class OrderItem extends Equatable {
   @PrimaryKey(autoGenerate: true)
   final int id;
@@ -9,7 +10,7 @@ class OrderItem extends Equatable {
   final String dropOffPoint;
   final double weight;
   final String instructions;
-  final DateTime createdAt;
+  final int createdAt;
   final String createdBy;
 
   const OrderItem({

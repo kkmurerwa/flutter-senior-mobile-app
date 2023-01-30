@@ -5,6 +5,7 @@ import 'package:flutter_senior_mobile_app/core/network/network_info.dart';
 import 'package:flutter_senior_mobile_app/features/orders/data/datasources/orders_local_data_source.dart';
 import 'package:flutter_senior_mobile_app/features/orders/data/datasources/orders_remote_data_source.dart';
 import 'package:flutter_senior_mobile_app/features/orders/data/models/order_item_model.dart';
+import 'package:flutter_senior_mobile_app/features/orders/domain/entities/order_item.dart';
 import 'package:flutter_senior_mobile_app/features/orders/domain/repositories/orders_repository.dart';
 
 class OrdersRepositoryImpl implements OrdersRepository {
@@ -19,7 +20,7 @@ class OrdersRepositoryImpl implements OrdersRepository {
   final NetworkInfo networkInfo;
 
   @override
-  Future<Either<Failure, List<OrderItemModel>>> getOrders() async {
+  Future<Either<Failure, List<OrderItem>>> getOrders() async {
     if (await networkInfo.isConnected) {
       throw UnimplementedError();
     } else {
@@ -33,7 +34,7 @@ class OrdersRepositoryImpl implements OrdersRepository {
   }
 
   @override
-  Future<Either<Failure, OrderItemModel>> getOrderById(int id) async {
+  Future<Either<Failure, OrderItem>> getOrderById(int id) async {
     if (await networkInfo.isConnected) {
       throw UnimplementedError();
     } else {
@@ -48,7 +49,7 @@ class OrdersRepositoryImpl implements OrdersRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> createOrder(OrderItemModel order) async {
+  Future<Either<Failure, bool>> createOrder(OrderItem order) async {
     if (await networkInfo.isConnected) {
       throw UnimplementedError();
     } else {
@@ -63,7 +64,7 @@ class OrdersRepositoryImpl implements OrdersRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> updateOrder(OrderItemModel order) async {
+  Future<Either<Failure, bool>> updateOrder(OrderItem order) async {
     if (await networkInfo.isConnected) {
       throw UnimplementedError();
     } else {
