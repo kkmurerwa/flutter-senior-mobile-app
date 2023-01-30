@@ -1,0 +1,9 @@
+{
+  "id": 1,
+  "pickUpPoint": "pickUpPoint",
+  "dropOffPoint": "dropOffPoint",
+  "weight": 1,
+  "instructions": "instructions",
+  "createdAt": "2023-01-30",
+  "createdBy": "createdBy"
+}
