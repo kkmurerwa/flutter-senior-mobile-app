@@ -11,7 +11,7 @@ final tOrderItem = OrderItem(
     createdBy: "createdBy"
 );
 
-final tOrderModelItem = OrderItemModel(
+final tOrderItemModel = OrderItemModel(
     id: 1,
     pickUpPoint: "pickUpPoint",
     dropOffPoint: "dropOffPoint",

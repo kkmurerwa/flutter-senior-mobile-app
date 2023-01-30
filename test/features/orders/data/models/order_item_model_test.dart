@@ -9,7 +9,7 @@ import '../../../../fixtures/test_models.dart';
 
 void main() {
   test('should be subclass of OrderItem entity', () async {
-    expect(tOrderModelItem, isA<OrderItem>());
+    expect(tOrderItemModel, isA<OrderItem>());
   });
 
   group('fromJson', () {
@@ -18,7 +18,7 @@ void main() {
       final result = OrderItemModel.fromJson(json.decode(fixture('order_double.json')));
 
       // assert
-      expect(result, tOrderModelItem);
+      expect(result, tOrderItemModel);
     });
 
     test('should return a valid model when the JSON weight is not double', () async {
@@ -26,7 +26,7 @@ void main() {
       final result = OrderItemModel.fromJson(json.decode(fixture('order_integer.json')));
 
       // assert
-      expect(result, tOrderModelItem);
+      expect(result, tOrderItemModel);
     });
 
   });
@@ -45,7 +45,7 @@ void main() {
       };
 
       // act
-      final result = tOrderModelItem.toJson();
+      final result = tOrderItemModel.toJson();
 
       // assert
       expect(result, expectedJsonMap);
