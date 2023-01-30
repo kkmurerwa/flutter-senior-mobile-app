@@ -20,7 +20,7 @@ void main() {
   test('should invoke getOrders method of the OrdersRepository', () async {
     // arrange
     when(() => mockOrdersRepository.getOrders())
-        .thenAnswer((_) async => Right([tOrderItem]));
+        .thenAnswer((_) async => Right([tOrderItemModel]));
 
     // act
     final result = await getOrdersUseCase();
@@ -32,14 +32,14 @@ void main() {
   test('should get orders from the repository', () async {
     // arrange
     when(() => mockOrdersRepository.getOrders())
-        .thenAnswer((_) async => Right([tOrderItem]));
+        .thenAnswer((_) async => Right([tOrderItemModel]));
 
     // act
     final result = await getOrdersUseCase();
 
     // assert
     result.fold((left) => fail('test failed'), (right) {
-      expect(right, equals([tOrderItem]));
+      expect(right, equals([tOrderItemModel]));
     });
   });
 }
