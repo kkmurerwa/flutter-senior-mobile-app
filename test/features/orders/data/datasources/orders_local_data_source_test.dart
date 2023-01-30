@@ -1,4 +1,5 @@
 import 'package:flutter_senior_mobile_app/core/database/database.dart';
+import 'package:flutter_senior_mobile_app/core/errors/exceptions.dart';
 import 'package:flutter_senior_mobile_app/features/orders/data/daos/orders_dao.dart';
 import 'package:flutter_senior_mobile_app/features/orders/data/datasources/orders_local_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -47,6 +48,18 @@ void main() {
 
       // assert
       expect(result, [tOrderItem]);
+    });
+
+    test('should throw CacheException if database contains no cache', () async {
+      // arrange
+      when(() => mockOrdersDao.getOrders())
+          .thenThrow(Exception());
+
+      // act
+      final call = dataSource.getOrders;
+
+      // assert
+      expect(() => call(), throwsA(isA<DatabaseException>()));
     });
   });
 }
