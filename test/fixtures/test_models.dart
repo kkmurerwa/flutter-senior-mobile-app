@@ -1,6 +1,9 @@
 import 'package:flutter_senior_mobile_app/features/orders/data/models/order_item_model.dart';
 import 'package:flutter_senior_mobile_app/features/orders/domain/entities/order_item.dart';
 
+final tHasConnectionFuture = Future.value(true);
+final tHasNoConnectionFuture = Future.value(false);
+
 final tOrderItem = OrderItem(
     id: 1,
     pickUpPoint: "pickUpPoint",
