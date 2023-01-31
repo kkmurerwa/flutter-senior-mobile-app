@@ -1,6 +1,5 @@
 import 'package:flutter_senior_mobile_app/core/database/database.dart';
 import 'package:flutter_senior_mobile_app/core/errors/exceptions.dart';
-import 'package:flutter_senior_mobile_app/features/orders/data/models/order_item_model.dart';
 import 'package:flutter_senior_mobile_app/features/orders/domain/entities/order_item.dart';
 
 abstract class OrdersLocalDataSource {
@@ -27,26 +26,54 @@ class OrdersLocalDataSourceImpl implements OrdersLocalDataSource {
   }
 
   @override
-  Future<OrderItem> getOrderById(int id) {
-    // TODO: implement getOrderById
-    throw UnimplementedError();
+  Future<OrderItem> getOrderById(int id) async {
+    try {
+      final ordersDao = database.ordersDao;
+      final orderItem = await ordersDao.getOrderById(id);
+
+      if (orderItem != null) {
+        return orderItem;
+      } else {
+        throw DatabaseException("Can't get order from database");
+      }
+    } catch (e) {
+      throw DatabaseException("Can't get order from database");
+    }
   }
 
   @override
-  Future<bool> createOrder(OrderItem orders) {
-    // TODO: implement createOrder
-    throw UnimplementedError();
+  Future<bool> createOrder(OrderItem order) {
+    try {
+      final ordersDao = database.ordersDao;
+      ordersDao.createOrder(order);
+
+      return Future.value(true);
+    } catch (e) {
+      throw DatabaseException("Can't create order");
+    }
   }
 
   @override
   Future<bool> updateOrder(OrderItem orders) {
-    // TODO: implement updateOrder
-    throw UnimplementedError();
+    try {
+      final ordersDao = database.ordersDao;
+      ordersDao.updateOrder(orders);
+
+      return Future.value(true);
+    } catch (e) {
+      throw DatabaseException("Can't update order");
+    }
   }
 
   @override
   Future<bool> deleteOrder(int id) {
-    // TODO: implement deleteOrder
-    throw UnimplementedError();
+    try {
+      final ordersDao = database.ordersDao;
+      ordersDao.deleteOrder(id);
+
+      return Future.value(true);
+    } catch (e) {
+      throw DatabaseException("Can't delete order");
+    }
   }
 }

@@ -103,7 +103,7 @@ class _$OrdersDao extends OrdersDao {
   _$OrdersDao(
     this.database,
     this.changeListener,
-  )   : _queryAdapter = QueryAdapter(database, changeListener),
+  )   : _queryAdapter = QueryAdapter(database),
         _orderItemInsertionAdapter = InsertionAdapter(
             database,
             'orders',
@@ -115,8 +115,7 @@ class _$OrdersDao extends OrdersDao {
                   'instructions': item.instructions,
                   'createdAt': item.createdAt,
                   'createdBy': item.createdBy
-                },
-            changeListener),
+                }),
         _orderItemUpdateAdapter = UpdateAdapter(
             database,
             'orders',
@@ -129,8 +128,7 @@ class _$OrdersDao extends OrdersDao {
                   'instructions': item.instructions,
                   'createdAt': item.createdAt,
                   'createdBy': item.createdBy
-                },
-            changeListener);
+                });
 
   final sqflite.DatabaseExecutor database;
 
@@ -156,8 +154,8 @@ class _$OrdersDao extends OrdersDao {
   }
 
   @override
-  Stream<OrderItem?> getOrderById(int id) {
-    return _queryAdapter.queryStream('SELECT * FROM orders WHERE id = ?1',
+  Future<OrderItem?> getOrderById(int id) async {
+    return _queryAdapter.query('SELECT * FROM orders WHERE id = ?1',
         mapper: (Map<String, Object?> row) => OrderItem(
             id: row['id'] as int,
             pickUpPoint: row['pickUpPoint'] as String,
@@ -166,9 +164,7 @@ class _$OrdersDao extends OrdersDao {
             instructions: row['instructions'] as String,
             createdAt: row['createdAt'] as int,
             createdBy: row['createdBy'] as String),
-        arguments: [id],
-        queryableName: 'orders',
-        isView: false);
+        arguments: [id]);
   }
 
   @override
@@ -183,7 +179,7 @@ class _$OrdersDao extends OrdersDao {
   }
 
   @override
-  Future<void> updateOrderItem(OrderItem order) async {
+  Future<void> updateOrder(OrderItem order) async {
     await _orderItemUpdateAdapter.update(order, OnConflictStrategy.replace);
   }
 }

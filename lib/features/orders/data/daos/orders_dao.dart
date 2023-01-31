@@ -9,13 +9,13 @@ abstract class OrdersDao {
   Future<List<OrderItem>> getOrders();
 
   @Query('SELECT * FROM $ORDERS_TABLE WHERE id = :id')
-  Stream<OrderItem?> getOrderById(int id);
+  Future<OrderItem?> getOrderById(int id);
 
   @Insert(onConflict: OnConflictStrategy.ignore)
   Future<void> createOrder(OrderItem order);
 
   @Update(onConflict: OnConflictStrategy.replace)
-  Future<void> updateOrderItem(OrderItem order);
+  Future<void> updateOrder(OrderItem order);
 
   @Query('DELETE FROM $ORDERS_TABLE WHERE id = :id')
   Future<void> deleteOrder(int id);
