@@ -22,6 +22,15 @@ class OrdersLoadedState extends OrdersState {
   List<Object?> get props => [orders];
 }
 
+class OrderCreatedState extends OrdersState {
+  final bool isCreated;
+
+  OrderCreatedState({required this.isCreated});
+
+  @override
+  List<Object?> get props => [isCreated];
+}
+
 class OrdersErrorState extends OrdersState {
   final String message;
 
