@@ -21,75 +21,114 @@ class OrdersRepositoryImpl implements OrdersRepository {
 
   @override
   Future<Either<Failure, List<OrderItem>>> getOrders() async {
-    if (await networkInfo.isConnected) {
-      throw UnimplementedError();
-    } else {
-      try {
-        final localOrders = await localDataSource.getOrders();
-        return Right(localOrders);
-      } on DatabaseException catch (exception) {
-        return Left(DatabaseFailure(exception.message));
-      }
+    // if (await networkInfo.isConnected) {
+    //   throw UnimplementedError();
+    // } else {
+    //   try {
+    //     final localOrders = await localDataSource.getOrders();
+    //     return Right(localOrders);
+    //   } on DatabaseException catch (exception) {
+    //     return Left(DatabaseFailure(exception.message));
+    //   }
+    // }
+
+    try {
+      final localOrders = await localDataSource.getOrders();
+      return Right(localOrders);
+    } on DatabaseException catch (exception) {
+      return Left(DatabaseFailure(exception.message));
     }
   }
 
   @override
   Future<Either<Failure, OrderItem>> getOrderById(int id) async {
-    if (await networkInfo.isConnected) {
-      throw UnimplementedError();
-    } else {
-      try {
-        final localOrders = await localDataSource.getOrderById(id);
+    // if (await networkInfo.isConnected) {
+    //   throw UnimplementedError();
+    // } else {
+    //   try {
+    //     final localOrders = await localDataSource.getOrderById(id);
+    //
+    //     return Right(localOrders);
+    //   } on DatabaseException catch (exception) {
+    //     return Left(DatabaseFailure(exception.message));
+    //   }
+    // }
 
-        return Right(localOrders);
-      } on DatabaseException catch (exception) {
-        return Left(DatabaseFailure(exception.message));
-      }
+    try {
+      final localOrders = await localDataSource.getOrderById(id);
+
+      return Right(localOrders);
+    } on DatabaseException catch (exception) {
+      return Left(DatabaseFailure(exception.message));
     }
   }
 
   @override
   Future<Either<Failure, bool>> createOrder(OrderItem order) async {
-    if (await networkInfo.isConnected) {
-      throw UnimplementedError();
-    } else {
-      try {
-        final localOrders = await localDataSource.createOrder(order);
+    // if (await networkInfo.isConnected) {
+    //   throw UnimplementedError();
+    // } else {
+    //   try {
+    //     final localOrders = await localDataSource.createOrder(order);
+    //
+    //     return Right(localOrders);
+    //   } on DatabaseException catch (exception) {
+    //     return Left(DatabaseFailure(exception.message));
+    //   }
+    // }
 
-        return Right(localOrders);
-      } on DatabaseException catch (exception) {
-        return Left(DatabaseFailure(exception.message));
-      }
+    try {
+      final localOrders = await localDataSource.createOrder(order);
+
+      return Right(localOrders);
+    } on DatabaseException catch (exception) {
+      return Left(DatabaseFailure(exception.message));
     }
   }
 
   @override
   Future<Either<Failure, bool>> updateOrder(OrderItem order) async {
-    if (await networkInfo.isConnected) {
-      throw UnimplementedError();
-    } else {
-      try {
-        final localOrders = await localDataSource.updateOrder(order);
+    // if (await networkInfo.isConnected) {
+    //   throw UnimplementedError();
+    // } else {
+    //   try {
+    //     final localOrders = await localDataSource.updateOrder(order);
+    //
+    //     return Right(localOrders);
+    //   } on DatabaseException catch (exception) {
+    //     return Left(DatabaseFailure(exception.message));
+    //   }
+    // }
 
-        return Right(localOrders);
-      } on DatabaseException catch (exception) {
-        return Left(DatabaseFailure(exception.message));
-      }
+    try {
+      final localOrders = await localDataSource.updateOrder(order);
+
+      return Right(localOrders);
+    } on DatabaseException catch (exception) {
+      return Left(DatabaseFailure(exception.message));
     }
   }
 
   @override
   Future<Either<Failure, bool>> deleteOrder(int id) async {
-    if (await networkInfo.isConnected) {
-      throw UnimplementedError();
-    } else {
-      try {
-        final localOrders = await localDataSource.deleteOrder(id);
+    // if (await networkInfo.isConnected) {
+    //   throw UnimplementedError();
+    // } else {
+    //   try {
+    //     final localOrders = await localDataSource.deleteOrder(id);
+    //
+    //     return Right(localOrders);
+    //   } on DatabaseException catch (exception) {
+    //     return Left(DatabaseFailure(exception.message));
+    //   }
+    // }
 
-        return Right(localOrders);
-      } on DatabaseException catch (exception) {
-        return Left(DatabaseFailure(exception.message));
-      }
+    try {
+      final localOrders = await localDataSource.deleteOrder(id);
+
+      return Right(localOrders);
+    } on DatabaseException catch (exception) {
+      return Left(DatabaseFailure(exception.message));
     }
   }
 }
