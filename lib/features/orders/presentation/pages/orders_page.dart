@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_senior_mobile_app/features/orders/presentation/bloc/orders_bloc.dart';
+import 'package:flutter_senior_mobile_app/features/orders/presentation/navigation/navigation.dart';
+import 'package:flutter_senior_mobile_app/features/orders/presentation/widgets/message_display.dart';
+import 'package:flutter_senior_mobile_app/features/orders/presentation/widgets/order_items_list_widget.dart';
 import 'package:flutter_senior_mobile_app/injection_container.dart';
 
 class OrdersPage extends StatelessWidget {
-  const OrdersPage({Key? key}) : super(key: key);
+  OrdersPage({Key? key}) : super(key: key);
+
+  BuildContext? blocContext;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +18,19 @@ class OrdersPage extends StatelessWidget {
         title: const Text('Orders'),
       ),
       body: buildBody(context),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 30.0, right: 30.0),
+        child: FloatingActionButton(
+          onPressed: () {
+            // Navigate to create order page
+            if (blocContext != null) {
+              Navigator.pushNamed(context, Routes.createOrder)
+                  .whenComplete(() => dispatchEvent(blocContext!));
+            }
+          },
+          child: const Icon(Icons.add),
+        ),
+      )
     );
   }
 
@@ -24,18 +42,22 @@ class OrdersPage extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: BlocBuilder<OrdersBloc, OrdersState>(
             builder: (context, state) {
+              blocContext = context;
+
               if (state is OrdersEmptyState) {
-                dispatchEvent(context, GetOrdersEvent());
+                dispatchEvent(context);
               }
 
               if (state is OrdersLoadingState) {
                 return const CircularProgressIndicator();
               } else if (state is OrdersLoadedState) {
-                return Text("Orders found are shown below: ${state.orders}");
+                final orders = state.orders;
+
+                return OrderItemsList(orders: orders);
               } else if (state is OrdersErrorState) {
-                return Text(state.message);
+                return MessageDisplay(message: state.message);
               } else {
-                return const Text('An unexpected error occurred');
+                return const MessageDisplay(message: 'An unexpected error occurred');
               }
             },
           ),
@@ -44,7 +66,7 @@ class OrdersPage extends StatelessWidget {
     );
   }
 
-  void dispatchEvent(BuildContext context, OrdersEvent event) {
-    BlocProvider.of<OrdersBloc>(context).add(event);
+  void dispatchEvent(BuildContext context) {
+    BlocProvider.of<OrdersBloc>(context).add(GetOrdersEvent());
   }
 }

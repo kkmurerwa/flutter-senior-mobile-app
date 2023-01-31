@@ -2,7 +2,7 @@ import 'package:flutter_senior_mobile_app/features/orders/domain/entities/order_
 
 class OrderItemModel extends OrderItem {
 
-  const OrderItemModel({
+  OrderItemModel({
     required int id,
     required String pickUpPoint,
     required String dropOffPoint,

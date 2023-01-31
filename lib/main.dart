@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_senior_mobile_app/features/orders/presentation/pages/orders_page.dart';
+import 'package:flutter_senior_mobile_app/features/orders/presentation/navigation/navigation.dart';
 import 'injection_container.dart' as di;
 
 void main() async {
@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      initialRoute: Routes.initialRoute,
+      routes: Routes.routes,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const OrdersPage(),
     );
   }
 }

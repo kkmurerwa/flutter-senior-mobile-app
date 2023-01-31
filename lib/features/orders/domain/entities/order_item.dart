@@ -5,7 +5,7 @@ import 'package:flutter_senior_mobile_app/features/orders/data/daos/orders_dao.d
 @Entity(tableName: ORDERS_TABLE)
 class OrderItem extends Equatable {
   @PrimaryKey(autoGenerate: true)
-  final int id;
+  int? id;
   final String pickUpPoint;
   final String dropOffPoint;
   final double weight;
@@ -13,8 +13,8 @@ class OrderItem extends Equatable {
   final int createdAt;
   final String createdBy;
 
-  const OrderItem({
-    required this.id,
+  OrderItem({
+    this.id,
     required this.pickUpPoint,
     required this.dropOffPoint,
     required this.weight,

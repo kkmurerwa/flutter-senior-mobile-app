@@ -86,10 +86,10 @@ void main() {
             .thenAnswer((_) async => tOrderItemModel);
 
         // act
-        final result = await repository.getOrderById(tOrderItemModel.id);
+        final result = await repository.getOrderById(tOrderItemModel.id!);
 
         // assert
-        verify(() => mockLocalDataSource.getOrderById(tOrderItemModel.id));
+        verify(() => mockLocalDataSource.getOrderById(tOrderItemModel.id!));
       });
 
       test('should return data when getOrderById invoked successfully', () async {
@@ -98,7 +98,7 @@ void main() {
             .thenAnswer((_) async => tOrderItemModel);
 
         // act
-        final result = await repository.getOrderById(tOrderItemModel.id);
+        final result = await repository.getOrderById(tOrderItemModel.id!);
 
         // assert
         result.fold((failure) => "test failed", (order) {
@@ -112,7 +112,7 @@ void main() {
             .thenThrow(DatabaseException("test"));
 
         // act
-        final result = await repository.getOrderById(tOrderItemModel.id);
+        final result = await repository.getOrderById(tOrderItemModel.id!);
 
         // assert
         expect(result, const Left(DatabaseFailure("test")));
@@ -202,10 +202,10 @@ void main() {
             .thenAnswer((_) async => true);
 
         // act
-        final result = await repository.deleteOrder(tOrderItemModel.id);
+        final result = await repository.deleteOrder(tOrderItemModel.id!);
 
         // assert
-        verify(() => mockLocalDataSource.deleteOrder(tOrderItemModel.id));
+        verify(() => mockLocalDataSource.deleteOrder(tOrderItemModel.id!));
       });
 
       test('should return true when deleteOrder invoked successfully', () async {
@@ -214,7 +214,7 @@ void main() {
             .thenAnswer((_) async => true);
 
         // act
-        final result = await repository.deleteOrder(tOrderItemModel.id);
+        final result = await repository.deleteOrder(tOrderItemModel.id!);
 
         // assert
         expect(result, const Right(true));
@@ -226,7 +226,7 @@ void main() {
             .thenThrow(DatabaseException("test"));
 
         // act
-        final result = await repository.deleteOrder(tOrderItemModel.id);
+        final result = await repository.deleteOrder(tOrderItemModel.id!);
 
         // assert
         expect(result, const Left(DatabaseFailure("test")));

@@ -99,7 +99,7 @@ void main() {
     test('should delete order item', () async {
       // act
       await ordersDao.createOrder(tOrderItem);
-      await ordersDao.deleteOrder(tOrderItem.id);
+      await ordersDao.deleteOrder(tOrderItem.id!);
       final result = await ordersDao.getOrders();
 
       // assert

@@ -64,7 +64,7 @@ void main() {
   });
 
   group('getOrderById', () {
-    final orderId = tOrderItem.id;
+    final orderId = tOrderItem.id!;
 
     test('should invoke getOrderById method of dao when getOrderById called', () async {
       // arrange
@@ -192,7 +192,7 @@ void main() {
   });
 
   group('deleteOrder', () {
-    final orderId = tOrderItem.id;
+    final orderId = tOrderItem.id!;
 
     test('should invoke deleteOrder method of dao when called', () async {
       // arrange

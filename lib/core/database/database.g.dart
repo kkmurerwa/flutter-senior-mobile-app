@@ -85,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `orders` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `pickUpPoint` TEXT NOT NULL, `dropOffPoint` TEXT NOT NULL, `weight` REAL NOT NULL, `instructions` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `createdBy` TEXT NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `orders` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `pickUpPoint` TEXT NOT NULL, `dropOffPoint` TEXT NOT NULL, `weight` REAL NOT NULL, `instructions` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `createdBy` TEXT NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -144,7 +144,7 @@ class _$OrdersDao extends OrdersDao {
   Future<List<OrderItem>> getOrders() async {
     return _queryAdapter.queryList('SELECT * FROM orders',
         mapper: (Map<String, Object?> row) => OrderItem(
-            id: row['id'] as int,
+            id: row['id'] as int?,
             pickUpPoint: row['pickUpPoint'] as String,
             dropOffPoint: row['dropOffPoint'] as String,
             weight: row['weight'] as double,
@@ -157,7 +157,7 @@ class _$OrdersDao extends OrdersDao {
   Future<OrderItem?> getOrderById(int id) async {
     return _queryAdapter.query('SELECT * FROM orders WHERE id = ?1',
         mapper: (Map<String, Object?> row) => OrderItem(
-            id: row['id'] as int,
+            id: row['id'] as int?,
             pickUpPoint: row['pickUpPoint'] as String,
             dropOffPoint: row['dropOffPoint'] as String,
             weight: row['weight'] as double,
