@@ -23,10 +23,11 @@ class OrdersPage extends StatelessWidget {
         child: FloatingActionButton(
           onPressed: () {
             // Navigate to create order page
-            if (blocContext != null) {
-              Navigator.pushNamed(context, Routes.createOrder)
-                  .whenComplete(() => dispatchEvent(blocContext!));
-            }
+            Navigator.pushNamed(context, Routes.createOrder).whenComplete(() {
+              if (blocContext != null) {
+                dispatchEvent(blocContext!);
+              }
+            });
           },
           child: const Icon(Icons.add),
         ),

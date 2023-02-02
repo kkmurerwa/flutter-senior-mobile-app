@@ -40,109 +40,107 @@ class CreateOrderPage extends StatelessWidget {
   BlocProvider<OrdersBloc> buildBody(BuildContext context) {
     return BlocProvider(
       create: (_) => sl<OrdersBloc>(),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: BlocBuilder<OrdersBloc, OrdersState>(
-            builder: (context, state) {
-              if (state is OrdersEmptyState) {
-                return SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: BlocBuilder<OrdersBloc, OrdersState>(
+          builder: (context, state) {
+            if (state is OrdersEmptyState) {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text(
+                            "Fill Below To Order",
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        buildTitleText(text: "Pick up point"),
+                        const SizedBox(height: 10),
+                        buildTextField(
+                            controller: _pickUpPointController,
+                            hintText: "The Address, Waiyaki Way, Westlands",
+                            validator: notEmptyValidator,
+                            keyboardType: TextInputType.streetAddress
+                        ),
+                        const SizedBox(height: 20),
+                        buildTitleText(text: "Drop off point"),
+                        const SizedBox(height: 10),
+                        buildTextField(
+                            controller: _dropOffPointController,
+                            hintText: "Green Shades, Ngo'ng Road, Lavington",
+                            validator: notEmptyValidator,
+                            keyboardType: TextInputType.streetAddress
+                        ),
+                        const SizedBox(height: 20),
+                        buildTitleText(text: "Estimated weight"),
+                        const SizedBox(height: 10),
+                        buildTextField(
+                            controller: _estimatedWeightController,
+                            hintText: "15.73",
+                            validator: notEmptyValidator,
+                            keyboardType: TextInputType.number
+                        ),
+                        const SizedBox(height: 20),
+                        buildTitleText(text: "Delivery instructions"),
+                        const SizedBox(height: 10),
+                        buildTextField(
+                            controller: _deliveryInstructionsController,
+                            hintText: "Call me on 0701234567 when you arrive",
+                            validator: notEmptyValidator,
+                            keyboardType: TextInputType.text
+                        ),
+                        const SizedBox(height: 40),
+                        ElevatedButton(
+                          onPressed: () {
+                            validateAndSubmit(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: const Color(0xFF451926),
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(5))
+                              )
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
                             child: Text(
-                              "Fill Below To Order",
+                              "Confirm & Order a trip",
                               style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          buildTitleText(text: "Pick up point"),
-                          const SizedBox(height: 10),
-                          buildTextField(
-                              controller: _pickUpPointController,
-                              hintText: "The Address, Waiyaki Way, Westlands",
-                              validator: notEmptyValidator,
-                              keyboardType: TextInputType.streetAddress
-                          ),
-                          const SizedBox(height: 20),
-                          buildTitleText(text: "Drop off point"),
-                          const SizedBox(height: 10),
-                          buildTextField(
-                              controller: _dropOffPointController,
-                              hintText: "Green Shades, Ngo'ng Road, Lavington",
-                              validator: notEmptyValidator,
-                              keyboardType: TextInputType.streetAddress
-                          ),
-                          const SizedBox(height: 20),
-                          buildTitleText(text: "Estimated weight"),
-                          const SizedBox(height: 10),
-                          buildTextField(
-                              controller: _estimatedWeightController,
-                              hintText: "15.73",
-                              validator: notEmptyValidator,
-                              keyboardType: TextInputType.number
-                          ),
-                          const SizedBox(height: 20),
-                          buildTitleText(text: "Delivery instructions"),
-                          const SizedBox(height: 10),
-                          buildTextField(
-                              controller: _deliveryInstructionsController,
-                              hintText: "Call me on 0701234567 when you arrive",
-                              validator: notEmptyValidator,
-                              keyboardType: TextInputType.text
-                          ),
-                          const SizedBox(height: 40),
-                          ElevatedButton(
-                            onPressed: () {
-                              validateAndSubmit(context);
-                            },
-                            style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor: const Color(0xFF451926),
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(5))
-                                )
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
-                              child: Text(
-                                "Confirm & Order a trip",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.normal
-                                ),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                );
-              } else if (state is OrdersLoadingState) {
-                return const CircularProgressIndicator();
-              } else if (state is OrderCreatedState) {
-                Navigator.pop(context);
+                ),
+              );
+            } else if (state is OrdersLoadingState) {
+              return const CircularProgressIndicator();
+            } else if (state is OrderCreatedState) {
+              Navigator.pop(context);
 
-                return const MessageDisplay(message: "Order created successfully");
-              } else if (state is OrdersErrorState) {
-                return MessageDisplay(message: state.message);
-              } else {
-                return const MessageDisplay(message: 'An unexpected error occurred');
-              }
-            },
-          ),
+              return const MessageDisplay(message: "Order created successfully");
+            } else if (state is OrdersErrorState) {
+              return MessageDisplay(message: state.message);
+            } else {
+              return const MessageDisplay(message: 'An unexpected error occurred');
+            }
+          },
         ),
       ),
     );
