@@ -24,6 +24,7 @@ class OrderItemsList extends StatelessWidget {
 
         return Card(
           elevation: 0,
+          key: const ValueKey("currentOrderCard"),
           child: Container(
             margin: const EdgeInsets.all(10.0),
             padding: const EdgeInsets.all(10.0),
