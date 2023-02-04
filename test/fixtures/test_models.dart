@@ -1,3 +1,5 @@
+import 'package:flutter_senior_mobile_app/features/onboarding/data/models/otp_response_model.dart';
+import 'package:flutter_senior_mobile_app/features/onboarding/data/models/verification_response_model.dart';
 import 'package:flutter_senior_mobile_app/features/onboarding/domain/entities/otp_response.dart';
 import 'package:flutter_senior_mobile_app/features/onboarding/domain/entities/verification_response.dart';
 import 'package:flutter_senior_mobile_app/features/orders/data/models/order_item_model.dart';
@@ -51,4 +53,16 @@ final tVerificationResponseFalse = VerificationResponse(
     message: '',
     success: false,
     token: null
+);
+
+final tOtpResponseModel = OtpResponseModel(
+    message: 'test message',
+    status: 'test status',
+    sent: true
+);
+
+final tVerificationResponseModel = VerificationResponseModel(
+    success: true,
+    message: 'test message',
+    token: 'test token'
 );
