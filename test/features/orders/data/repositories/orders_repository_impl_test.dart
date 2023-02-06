@@ -31,8 +31,7 @@ void main() {
     );
   });
 
-  group('noInternetConnection', ()
-  {
+  group('noInternetConnection', () {
     setUp(() {
       when(() => networkInfo.isConnected).thenAnswer((_) async => false);
 
