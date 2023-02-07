@@ -17,7 +17,12 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
 
   @override
   Future<Either<Failure, OtpResponse>> requestOtp(String phoneNumber) async {
-    return await remoteDataSource.requestOtp(phoneNumber);
+    try {
+      final result = await remoteDataSource.requestOtp(phoneNumber);
+      return result;
+    } on Exception {
+      return Left(ServerFailure("Server Failure"));
+    }
   }
 
   @override

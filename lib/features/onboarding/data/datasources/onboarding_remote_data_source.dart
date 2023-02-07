@@ -9,8 +9,8 @@ import 'package:http/http.dart' as http;
 import '../../../../core/errors/exceptions.dart';
 
 abstract class OnboardingRemoteDataSource {
-  Future<Either<Exception, OtpResponse>> requestOtp(String phoneNumber);
-  Future<Either<Exception, VerificationResponse>> verifyOtp(String phoneNumber, String otp);
+  Future<Either<Failure, OtpResponse>> requestOtp(String phoneNumber);
+  Future<Either<Failure, VerificationResponse>> verifyOtp(String phoneNumber, String otp);
 }
 
 class OnboardingRemoteDataSourceImpl implements OnboardingRemoteDataSource {
@@ -19,7 +19,7 @@ class OnboardingRemoteDataSourceImpl implements OnboardingRemoteDataSource {
   OnboardingRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<Either<Exception, OtpResponse>> requestOtp(String phoneNumber) async {
+  Future<Either<Failure, OtpResponse>> requestOtp(String phoneNumber) async {
     try {
       return client.post(
         Uri.parse(""),
@@ -36,16 +36,16 @@ class OnboardingRemoteDataSourceImpl implements OnboardingRemoteDataSource {
             )
           ));
         } else {
-          return Future.value(Left(ServerException("Server Error")));
+          return Future.value(Left(ServerFailure("Server Error")));
         }
       });
     } catch (e) {
-      return Future.value(Left(ServerException("Server Error")));
+      return Future.value(Left(ServerFailure("Server Error")));
     }
   }
 
   @override
-  Future<Either<Exception, VerificationResponse>> verifyOtp(String phoneNumber, String otp) {
+  Future<Either<Failure, VerificationResponse>> verifyOtp(String phoneNumber, String otp) {
     try {
       return client.post(
         Uri.parse(""),
@@ -63,11 +63,11 @@ class OnboardingRemoteDataSourceImpl implements OnboardingRemoteDataSource {
             )
           ));
         } else {
-          return Future.value(Left(ServerException("Server Error")));
+          return Future.value(Left(ServerFailure("Server Error")));
         }
       });
     } catch (e) {
-      return Future.value(Left(ServerException("Server Error")));
+      return Future.value(Left(ServerFailure("Server Error")));
     }
   }
 }

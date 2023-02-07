@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_senior_mobile_app/core/errors/exceptions.dart';
 import 'package:flutter_senior_mobile_app/core/errors/failures.dart';
 import 'package:flutter_senior_mobile_app/core/network/network_info.dart';
 import 'package:flutter_senior_mobile_app/features/onboarding/data/datasources/onboarding_remote_data_source.dart';
@@ -58,7 +59,7 @@ void main() {
     test('should return failure when requestOtp invoked unsuccessfully', () async {
       // arrange
       when(() => mockRemoteDataSource.requestOtp(any()))
-          .thenAnswer((_) async => const Left(ServerFailure("")));
+          .thenAnswer((_) async => Left(ServerFailure("")));
 
       // act
       final result = await repository.requestOtp('');
@@ -96,7 +97,7 @@ void main() {
     test('should return failure when verifyOtp invoked unsuccessfully', () async {
       // arrange
       when(() => mockRemoteDataSource.verifyOtp(any(), any()))
-          .thenAnswer((_) async => const Left(ServerFailure("")));
+          .thenAnswer((_) async => Left(ServerFailure("")));
 
       // act
       final result = await repository.verifyOtp('', '');
